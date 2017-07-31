@@ -60,6 +60,7 @@ class App extends Component {
         return state;
       })
     }
+    BooksAPI.update(entry, shelf);
   }
    
   
