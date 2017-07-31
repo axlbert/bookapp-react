@@ -3,6 +3,8 @@ import './App.css';
 import ShelfList from './booklist'
 import * as BooksAPI from './BooksAPI'
 import { BrowserRouter, Route } from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import SearchBook from './searchBook'
 /*import PropTypes from 'prop-types' */
 /* this requires controlled components to be understood */
 /* https://facebook.github.io/react/docs/forms.html#why-select-value */
@@ -72,9 +74,13 @@ class App extends Component {
     return (
       <BrowserRouter>
       <div className="App">
+        <Route path="/search" render={() => (
+            <SearchBook />
+          )}
+        />
         {/* Using Route allows to use the back/forth buttons in the browser. Use "exact" to only render where path*/}
         <Route path="/" render={() => (
-            <ShelfList books={this.state.books} handleListChange={this.handleListChange} onDeleteBook={this.removeBook}/>
+            <ShelfList books={this.state.books} showingBooks={this.state.showingBooks} handleListChange={this.handleListChange} onDeleteBook={this.removeBook}/>
           )}
         />
       </div>
