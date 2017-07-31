@@ -3,7 +3,6 @@ import './App.css';
 import ShelfList from './booklist'
 import * as BooksAPI from './BooksAPI'
 import { BrowserRouter, Route } from 'react-router-dom'
-import {Link} from 'react-router-dom'
 import SearchBook from './searchBook'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
@@ -55,7 +54,7 @@ class App extends Component {
       books : this.state.books.filter((c) => c.title !== book.title)
     }))
     /* this helps to also remove book from DB*/
-    BooksAPI.remove(book.id);
+    BooksAPI.update(book, 'none')
   }
 
 
@@ -81,11 +80,6 @@ class App extends Component {
     }
     BooksAPI.update(entry, shelf);
   }
-   
-  
-
-
-   
 
   render() {
       let showingBooks
@@ -104,7 +98,7 @@ class App extends Component {
     return (
       <BrowserRouter>
       <div className="App">
-        <Route path="/search" render={() => (
+        <Route exact path="/search" render={() => (
             <SearchBook query={this.state.query} updateQuery={this.updateQuery}/>
           )}
         />
