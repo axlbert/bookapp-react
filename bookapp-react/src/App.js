@@ -1,68 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import ShelfList from './booklist'
+/*import PropTypes from 'prop-types' */
 /* this requires controlled components to be understood */
 /* https://facebook.github.io/react/docs/forms.html#why-select-value */
 
-function BookItem(props) {
-  const title = props.title;
-  const shelf = props.shelf;
 
-  return (
-
-    <div>
-      <div className="book-title">
-          {title}
-        </div>
-
-      
-        <select value={shelf} onChange={e =>
-                props.handleListChange(props, e.target.value)}>
-          <option value="none" disabled>Move to...</option>
-          <option value="currentlyReading">Currently Reading</option>
-          <option value="wantToRead">Want to Read</option>
-          <option value="read">already read</option>
-          <option value="none">None</option>
-        </select>
-      
-    </div>
-    )
-}
-// if we just render, we could also just build a function and pass in props func(props)
-
-
-function ShelfList(props) {
-
-  const shelves = ["currentlyReading","wantToRead","read"];
-    return (
-      <div>
-        <h1>My Books</h1>
-        {
-          shelves.map(element => 
-              {
-                return(
-                  <div key={element}>
-                    <h2>{element}</h2>
-                      {props.books.filter(el => el.shelf === element)
-                        .map((bookElem) => (
-                                     <BookItem key={bookElem.title}
-                                     id = {bookElem.id}
-                                
-                                title = {bookElem.title}
-                                shelf = {bookElem.shelf}
-                                handleListChange={props.handleListChange}/>
-                                
-                                
-                                  )
-                              )}
-                    </div>
-                )
-              }
-          )
-        }
-      </div>
-      )
-  }
 
 /* .filter(bookElem => bookElem === element) */
 class App extends Component {
@@ -102,16 +45,22 @@ class App extends Component {
     }
   }
    
-/*
+
   removeBook = (book) => {
     this.setState((state) => ({
-      currentlyReading : state.currentlyReading.filter((c) => c.title !== book.title)
-}*/    
+      books : this.state.books.filter((c) => c.title !== book.title)
+    }))
+
+  }
+
+
+
+   
 
   render() {
     return (
       <div className="App">    
-        <ShelfList books={this.state.books} handleListChange={this.handleListChange}/>
+        <ShelfList books={this.state.books} handleListChange={this.handleListChange} onDeleteBook={this.removeBook}/>
       </div>
     );
   }

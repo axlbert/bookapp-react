@@ -1,0 +1,33 @@
+import React from 'react';
+
+function BookItem(props) {
+  const title = props.title;
+  const shelf = props.shelf;
+ 
+  return (
+
+    <div>
+      <div className="book-title">
+          {title}
+        </div>
+
+      
+        <select value={shelf} onChange={e =>
+                props.handleListChange(props, e.target.value)}>
+          <option value="none" disabled>Move to...</option>
+          <option value="currentlyReading">Currently Reading</option>
+          <option value="wantToRead">Want to Read</option>
+          <option value="read">already read</option>
+          <option value="none">None</option>
+        </select>
+        <button onClick={() => props.onDeleteBook(props)} >delete book</button>
+      
+    </div>
+    )
+}
+
+
+
+
+
+export default BookItem
