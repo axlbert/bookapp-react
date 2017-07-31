@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BookItem from './bookitem'
+import {Link} from 'react-router-dom'
 
 
 /* this is a controlled component where react controls the state of the component */
@@ -11,12 +12,13 @@ import BookItem from './bookitem'
 const shelves = ["currentlyReading","wantToRead","read"]
 
 class ShelfList extends Component {
-/* when refactoring from frunction to class, we need to include this. before props and add render() instead of just return */
+/* when refactoring from function to class, we need to include this. before props and add render() instead of just return */
     render() {
     /* further below this.props.books list has been replaced by showingBooks since this is the filtered list */
     	return (
       <div className="bookstore">
         <h1>My Books</h1>
+        <Link className="close-search" to="/search">Search</Link>
         {
           shelves.map(element => 
               {

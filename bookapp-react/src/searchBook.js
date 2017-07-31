@@ -9,9 +9,10 @@ class SearchBook extends Component {
 
 		return (
 			<div class="searcher">
+			Search
       		<input className="search-box" type="text"
       		placeholder="search for book titles"
-      		value={this.state.query}
+      		value={this.props.query}
       		onChange={(event) => this.updateQuery(event.target.value)}
 			/>
 

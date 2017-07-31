@@ -93,9 +93,9 @@ class App extends Component {
       if (this.state.query) {
           /* escape special characters and use them as string literal regardless of case */
         const match = new RegExp(escapeRegExp(this.state.query), 'i')
-        showingBooks = this.props.books.filter((book) => match.test(book.title))
+        showingBooks = this.state.books.filter((book) => match.test(book.title))
         } else {
-          showingBooks = this.props.books
+          showingBooks = this.state.books
         }
 
        /*this is alphabetizing book titles */
@@ -110,7 +110,7 @@ class App extends Component {
         />
         {/* Using Route allows to use the back/forth buttons in the browser. Use "exact" to only render where path*/}
         <Route path="/" render={() => (
-            <ShelfList books={this.state.books} showingBooks={this.state.showingBooks} handleListChange={this.handleListChange} onDeleteBook={this.removeBook}/>
+            <ShelfList books={this.state.books} showingBooks={showingBooks} handleListChange={this.handleListChange} onDeleteBook={this.removeBook}/>
           )}
         />
       </div>
