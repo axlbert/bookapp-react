@@ -71,7 +71,7 @@ class App extends Component {
     return (
       <BrowserRouter>
       <div className="App">
-        {/* using Route allows to use the back/forth buttons in the browser. Use "exact" to only render where path*/}
+        {/* Using Route allows to use the back/forth buttons in the browser. Use "exact" to only render where path*/}
         <Route path="/" render={() => (
             <ShelfList books={this.state.books} handleListChange={this.handleListChange} onDeleteBook={this.removeBook}/>
           )}
