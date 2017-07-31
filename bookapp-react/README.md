@@ -1,6 +1,6 @@
 How to launch the book reading tracker app:
 
-1. download repo
+1. download the repo
 2. open console and navigate into folder
 3. type npm install
 4. type npm start 
