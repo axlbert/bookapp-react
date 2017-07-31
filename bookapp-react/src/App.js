@@ -5,6 +5,10 @@ import * as BooksAPI from './BooksAPI'
 import { BrowserRouter, Route } from 'react-router-dom'
 import {Link} from 'react-router-dom'
 import SearchBook from './searchBook'
+import escapeRegExp from 'escape-string-regexp'
+import sortBy from 'sort-by'
+
+
 /*import PropTypes from 'prop-types' */
 /* this requires controlled components to be understood */
 /* https://facebook.github.io/react/docs/forms.html#why-select-value */
@@ -20,10 +24,23 @@ class App extends Component {
     /* this.removebook is not required to be bound ? still works without the above style */
 
     this.state = {
-      books : []
+      books : [],
+      query : ''
     };
+
   }
   
+  /* passing in query for search */
+  updateQuery = (query) => {
+    this.setState({ query: query.trim() })
+  }
+
+  /* setting the query to an empty string */
+  resetQuery = (query) => {
+    this.setState({ query: '' })
+  }
+
+
   /* lifecyle event for the api request */
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
@@ -71,11 +88,24 @@ class App extends Component {
    
 
   render() {
+      let showingBooks
+      /* matching of book query*/
+      if (this.state.query) {
+          /* escape special characters and use them as string literal regardless of case */
+        const match = new RegExp(escapeRegExp(this.state.query), 'i')
+        showingBooks = this.props.books.filter((book) => match.test(book.title))
+        } else {
+          showingBooks = this.props.books
+        }
+
+       /*this is alphabetizing book titles */
+      showingBooks.sort(sortBy('title'));
+
     return (
       <BrowserRouter>
       <div className="App">
         <Route path="/search" render={() => (
-            <SearchBook />
+            <SearchBook query={this.state.query} updateQuery={this.updateQuery}/>
           )}
         />
         {/* Using Route allows to use the back/forth buttons in the browser. Use "exact" to only render where path*/}
