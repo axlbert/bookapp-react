@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import ShelfList from './booklist'
 import * as BooksAPI from './BooksAPI'
+import { BrowserRouter, Route } from 'react-router-dom'
 /*import PropTypes from 'prop-types' */
 /* this requires controlled components to be understood */
 /* https://facebook.github.io/react/docs/forms.html#why-select-value */
@@ -29,12 +30,13 @@ class App extends Component {
   }
 
   /* deleting a book from a shelf */
+  /* endpoint not provided by API - not implemented further */
   removeBook = (book) => {
     this.setState((state) => ({
       books : this.state.books.filter((c) => c.title !== book.title)
     }))
     /* this helps to also remove book from DB*/
-    BooksAPI.remove(book);
+    BooksAPI.remove(book.id);
   }
 
 
@@ -67,9 +69,15 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">    
-        <ShelfList books={this.state.books} handleListChange={this.handleListChange} onDeleteBook={this.removeBook}/>
+      <BrowserRouter>
+      <div className="App">
+        {/* using Route allows to use the back/forth buttons in the browser. Use "exact" to only render where path*/}
+        <Route path="/" render={() => (
+            <ShelfList books={this.state.books} handleListChange={this.handleListChange} onDeleteBook={this.removeBook}/>
+          )}
+        />
       </div>
+      </BrowserRouter>
     );
   }
 }

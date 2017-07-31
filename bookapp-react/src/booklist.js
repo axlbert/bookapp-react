@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import BookItem from './bookitem'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
+import {Link} from 'react-router-dom'
 /* this is a controlled component where react controls the state of the component */
 
 // if we just render, we could also just build a function and pass in props func(props)
@@ -39,8 +40,9 @@ class ShelfList extends Component {
 
     	return (
       <div className="bookstore">
-      	
-      	<div className="searchbar">
+      	{/* replace LINK by div if reactrouter isnt used, to needs to be replaced by href */}
+      	<Link className="searchbar"
+      		to="/search">
       		<input className="search-box"
       		type="text"
       		placeholder="search for book titles"
@@ -50,7 +52,7 @@ class ShelfList extends Component {
 
       		/>
 
-      	</div>
+      	</Link>
         <h1>My Books</h1>
         {
           shelves.map(element => 

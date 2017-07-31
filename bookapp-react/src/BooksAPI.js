@@ -32,11 +32,11 @@ export const update = (book, shelf) =>
     body: JSON.stringify({ shelf })
   }).then(res => res.json())
 
-
-export const remove = (book) =>
-  fetch(`${api}/books/${book.id}`, { method: 'DELETE', headers })
+/* not a provided api endpoint */
+export const remove = (bookId) =>
+  fetch(`${api}/books/${bookId}`, { method: 'DELETE', headers })
     .then(res => res.json())
-    .then(data => data.book)
+    .then(data => data.book) 
 
 
 export const search = (query, maxResults) =>
