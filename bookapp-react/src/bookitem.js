@@ -1,6 +1,9 @@
 import React from 'react';
 
+
+/* cannot use lifecycle events in functions */
 function BookItem(props) {
+
   const title = props.title;
   const shelf = props.shelf;
  
@@ -11,7 +14,7 @@ function BookItem(props) {
           {title}
         </div>
 
-      
+      {/* {JSON.stringify(title)}*/}
         <select value={shelf} onChange={e =>
                 props.handleListChange(props, e.target.value)}>
           <option value="none" disabled>Move to...</option>

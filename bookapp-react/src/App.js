@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import ShelfList from './booklist'
+import * as BooksAPI from './BooksAPI'
 /*import PropTypes from 'prop-types' */
 /* this requires controlled components to be understood */
 /* https://facebook.github.io/react/docs/forms.html#why-select-value */
@@ -13,26 +14,40 @@ class App extends Component {
     super(props);
     this.handleListChange = this.handleListChange.bind(this);
     this.findBookInList = this.findBookInList.bind(this);
+    /* this.removebook is not required to be bound ? still works without the above style */
 
     this.state = {
-      books : [
-{ id: 1, title: 'henry potter', rating: 'awesome', shelf: 'currentlyReading'},
- {id: 2, title: 'lord of the things', rating: 'awesome', shelf: 'currentlyReading'},
- {id: 3, title: 'charlotte array', rating: 'mediocre', shelf: 'currentlyReading'},
- {id: 4, title: 'dawnlight', rating: 'mediocre', shelf: 'read'},
- {id: 5, title: 'dawnlight2', rating: 'mediocre', shelf: 'wantToRead'},
-    ]
+      books : []
     };
   }
   
+  /* lifecyle event for the api request */
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      this.setState({books})
+    })
+  }
+
+  /* deleting a book from a shelf */
+  removeBook = (book) => {
+    this.setState((state) => ({
+      books : this.state.books.filter((c) => c.title !== book.title)
+    }))
+    /* this helps to also remove book from DB*/
+    BooksAPI.remove(book);
+  }
+
+
+ 
+
+  /* helper function for book list changes */
   findBookInList(id) {
     return this.state.books.findIndex(book => book.id === id);
     
   };
 
 
-  
-    
+  /* moving books between different shelves */
   handleListChange(entry, shelf) {
     const bookIndex = this.findBookInList(entry.id);
     console.log(entry)
@@ -45,14 +60,7 @@ class App extends Component {
     }
   }
    
-
-  removeBook = (book) => {
-    this.setState((state) => ({
-      books : this.state.books.filter((c) => c.title !== book.title)
-    }))
-
-  }
-
+  
 
 
    
