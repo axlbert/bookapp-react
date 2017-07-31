@@ -23,7 +23,8 @@ function BookItem(props) {
           <option value="read">already read</option>
           <option value="none">None</option>
         </select>
-        <button onClick={() => props.onDeleteBook(props)} >delete book</button>
+    {/* remove button deactivated since api endpoint not supported for now */}
+        <button style={{"display": "none"}} onClick={() => props.onDeleteBook(props)} >delete book</button>
       
     </div>
     )

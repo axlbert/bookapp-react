@@ -19,8 +19,14 @@ class ShelfList extends Component {
  		query: ''
  	}
 
+ 	/* passing in query for search */
  	updateQuery = (query) => {
  		this.setState({ query: query.trim() })
+ 	}
+
+ 	/* setting the query to an empty string */
+ 	resetQuery = (query) => {
+ 		this.setState({ query: '' })
  	}
 
     render() {
@@ -49,10 +55,11 @@ class ShelfList extends Component {
       		value={this.state.query}
       		onChange={(event) => this.updateQuery(event.target.value)}
 
-
       		/>
 
+
       	</Link>
+      	<Link className="close-search" to="/" onClick={() => this.resetQuery()}>back</Link>
         <h1>My Books</h1>
         {
           shelves.map(element => 
