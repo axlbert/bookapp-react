@@ -24,7 +24,8 @@ class App extends Component {
 
     this.state = {
       books : [],
-      query : ''
+      query : '' , 
+      searchResults : []
     };
 
   }
@@ -34,9 +35,9 @@ class App extends Component {
     this.setState({ query: query.trim() })
   }*/
   updateQuery = (query) => {
-    BooksAPI.search(query.trim(),10).then( (results) => {
+    BooksAPI.search(query,10).then( (results) => {
       this.setState({
-        query: query.trim()
+        searchResults: query.trim()
       })
     })
   }
@@ -107,7 +108,8 @@ class App extends Component {
       <BrowserRouter>
       <div className="App">
         <Route exact path="/search" render={() => (
-            <SearchBook query={this.state.query} updateQuery={this.updateQuery}/>
+            {/*<SearchBook query={this.state.query} updateQuery={this.updateQuery}/>*/}
+            <SearchBook searchResults={this.state.searchResults} query={this.state.query} showingBooks={showingBooks} handleListChange={this.handleListChange} onDeleteBook={this.removeBook}/>
           )}
         />
         {/* Using Route allows to use the back/forth buttons in the browser. Use "exact" to only render where path*/}

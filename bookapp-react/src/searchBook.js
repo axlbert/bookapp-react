@@ -24,6 +24,7 @@ class SearchBook extends Component {
       	
       	<Link className="close-search" to="/">back</Link>
       	</div>
+      	<ShelfList books={this.props.searchResults} showingBooks={this.props.showingBooks} handleListChange={this.props.handleListChange} onDeleteBook={this.props.onDeleteBook}/>
       	</div>
 			)
 	}
