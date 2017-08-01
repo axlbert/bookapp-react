@@ -34,8 +34,12 @@ class App extends Component {
     this.setState({ query: query.trim() })
   }*/
   updateQuery = (query) => {
-    BooksAPI.search(query.trim(), 100)
-    }
+    BooksAPI.search(query.trim(),100).then( (results) => {
+      this.setState({
+        query: query.trim()
+      })
+    })
+  }
 
 
   /* setting the query to an empty string */
