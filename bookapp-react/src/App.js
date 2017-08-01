@@ -59,6 +59,10 @@ class App extends Component {
     this.setState({ query: '' })
   }
 
+  refreshBooks = () => {
+    this.setState({ searchResults : this.state.books })
+  }
+
 
   /* lifecyle event for the api request */
   componentDidMount() {
@@ -95,11 +99,17 @@ class App extends Component {
     if (bookIndex !== -1) {
       this.setState(state => {
         state.books[bookIndex].shelf = shelf;
+  
         return state;
       })
     }
     BooksAPI.update(entry, shelf);
     this.resetQuery();
+    this.refreshBooks();
+     BooksAPI.getAll().then((books) => {
+      this.setState({books})
+    })
+
   }
 
   render() {
