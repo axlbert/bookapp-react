@@ -30,9 +30,13 @@ class App extends Component {
   }
   
   /* passing in query for search */
-  updateQuery = (query) => {
+  /*updateQuery = (query) => {
     this.setState({ query: query.trim() })
-  }
+  }*/
+  updateQuery = (query) => {
+    BooksAPI.search(query.trim(), 100)
+    }
+
 
   /* setting the query to an empty string */
   resetQuery = (query) => {
