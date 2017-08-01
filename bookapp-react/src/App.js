@@ -37,7 +37,8 @@ class App extends Component {
   updateQuery = (query) => {
     BooksAPI.search(query,10).then( (results) => {
       this.setState({
-        searchResults: query.trim()
+       query: query.trim(),
+       searchResults: results,
       })
     })
   }
@@ -88,6 +89,7 @@ class App extends Component {
       })
     }
     BooksAPI.update(entry, shelf);
+    this.resetQuery();
   }
 
   render() {
@@ -108,7 +110,8 @@ class App extends Component {
       <BrowserRouter>
       <div className="App">
         <Route exact path="/search" render={() => (
-            <SearchBook query={this.state.query} updateQuery={this.updateQuery}/>
+            
+            <SearchBook query={this.state.query} updateQuery={this.updateQuery} books={this.state.searchResults} handleListChange={this.handleListChange}/>
             
           )}
         />

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import './App.css'
 import ShelfList from './booklist'
+import BookItem from './bookitem'
 
 /* not pursued further since that endpoint is not available on the API */
 class SearchBook extends Component {
@@ -25,6 +26,36 @@ class SearchBook extends Component {
       	<Link className="close-search" to="/">back</Link>
       	</div>
       {/*<ShelfList books={this.props.searchResults} showingBooks={this.props.showingBooks} handleListChange={this.props.handleListChange} onDeleteBook={this.props.onDeleteBook}/> */}
+      	<div className="search-results">
+      		
+
+                  
+                      <div className="bookshelf-books">
+                        <ol className="books-grid">
+                        
+
+                      {this.props.books.map((book) => (
+                                     <BookItem key={book.title}
+                                           id = {book.id}
+                                      
+                                      title = {book.title}
+                                      shelf = {book.shelf}
+                                      image = {book.imageLinks.smallThumbnail}
+                                      authors = {book.authors}
+                                      handleListChange={this.props.handleListChange}
+                                      onDeleteBook={this.props.onDeleteBook}
+                                      
+                                      />
+                                  )
+                              )}
+                       
+                        </ol>
+                      </div>
+                      </div>
+                  
+                )
+      	
+
       	</div>
 			)
 	}
