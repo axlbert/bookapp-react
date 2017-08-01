@@ -34,7 +34,7 @@ class App extends Component {
     this.setState({ query: query.trim() })
   }*/
   updateQuery = (query) => {
-    BooksAPI.search(query.trim(),100).then( (results) => {
+    BooksAPI.search(query.trim(),10).then( (results) => {
       this.setState({
         query: query.trim()
       })
@@ -111,7 +111,7 @@ class App extends Component {
           )}
         />
         {/* Using Route allows to use the back/forth buttons in the browser. Use "exact" to only render where path*/}
-        <Route path="/" render={() => (
+        <Route exact path="/" render={() => (
             <ShelfList books={this.state.books} showingBooks={showingBooks} handleListChange={this.handleListChange} onDeleteBook={this.removeBook}/>
           )}
         />
