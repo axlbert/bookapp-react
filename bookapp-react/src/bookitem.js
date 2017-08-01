@@ -8,12 +8,12 @@ function BookItem(props) {
   const shelf = props.shelf;
   const authors = props.authors;
   const image = props.image;
- 
+  
   return (
     <div className="book">
     <div className="book-top">
    
-      <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url('+{image}+')'   }}></div>
+      <img className="book-cover"  src={image}/>
       <div className="book-shelf-changer">
         <select value={shelf} onChange={e =>
                 props.handleListChange(props, e.target.value)}>

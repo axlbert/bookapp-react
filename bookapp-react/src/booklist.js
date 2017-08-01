@@ -31,7 +31,7 @@ class ShelfList extends Component {
                     <h2 className="bookshelf-title">{element}</h2>
                       <div className="bookshelf-books">
                         <ol className="books-grid">
-                        <li>
+                        
 
                       {this.props.showingBooks.filter(el => el.shelf === element)
                         .map((book) => (
@@ -47,7 +47,7 @@ class ShelfList extends Component {
                                       />
                                   )
                               )}
-                        </li>
+                       
                         </ol>
                       </div>
                       </div>
