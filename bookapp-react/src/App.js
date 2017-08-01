@@ -36,10 +36,20 @@ class App extends Component {
   }*/
   updateQuery = (query) => {
     BooksAPI.search(query,10).then( (results) => {
+      try {
       this.setState({
        query: query.trim(),
        searchResults: results,
       })
+     }
+     catch(err) {
+      this.setState({
+       query: query.trim(),
+       searchResults: [],
+      })
+
+
+      } 
     })
   }
 

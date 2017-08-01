@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import './App.css'
-import ShelfList from './booklist'
 import BookItem from './bookitem'
 
 /* not pursued further since that endpoint is not available on the API */
@@ -34,7 +33,9 @@ class SearchBook extends Component {
                         <ol className="books-grid">
                         
 
-                      {this.props.books.map((book) => (
+                      {
+
+                      	this.props.books.map((book) => (
                                      <BookItem key={book.title}
                                            id = {book.id}
                                       
