@@ -6,15 +6,15 @@ function BookItem(props) {
 
   const title = props.title;
   const shelf = props.shelf;
+  const authors = props.authors;
+  const image = props.image;
  
   return (
-
-    <div>
-      <div className="book-title">
-          {title}
-        </div>
-
-      {/* {JSON.stringify(title)}*/}
+    <div className="book">
+    <div className="book-top">
+   
+      <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url('+{image}+')'   }}></div>
+      <div className="book-shelf-changer">
         <select value={shelf} onChange={e =>
                 props.handleListChange(props, e.target.value)}>
           <option value="none" disabled>Move to...</option>
@@ -23,9 +23,14 @@ function BookItem(props) {
           <option value="read">already read</option>
           <option value="none">None</option>
         </select>
+      </div>
+
     {/* remove button deactivated since api endpoint not supported for now */}
         <button style={{"display": "none"}} onClick={() => props.onDeleteBook(props)} >delete book</button>
       
+    </div>
+    <div className="book-title">{title}</div>
+    <div className="book-authors">{authors}</div>
     </div>
     )
 }

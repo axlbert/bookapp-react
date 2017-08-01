@@ -16,35 +16,47 @@ class ShelfList extends Component {
     render() {
     /* further below this.props.books list has been replaced by showingBooks since this is the filtered list */
     	return (
-      <div className="bookstore">
-        <h1>My Books</h1>
-        <Link className="close-search" to="/search">Search</Link>
+      <div className="list-books">
+        <div className="list-books-title">
+          <h1>My Books</h1>
+          </div>
         {
           shelves.map(element => 
               {
                 return(
-                  <div key={element}>
-                    <h2>{element}</h2>
+
+                  <div className="list-books-content" key={element}>
+
+                  <div className="bookshelf">
+                    <h2 className="bookshelf-title">{element}</h2>
+                      <div className="bookshelf-books">
+                        <ol className="books-grid">
+                        <li>
 
                       {this.props.showingBooks.filter(el => el.shelf === element)
                         .map((book) => (
                                      <BookItem key={book.title}
-                                     id = {book.id}
-                                
-                                title = {book.title}
-                                shelf = {book.shelf}
-                                handleListChange={this.props.handleListChange}
-                                onDeleteBook={this.props.onDeleteBook}
-                                />
-                                
-                                
+                                           id = {book.id}
+                                      
+                                      title = {book.title}
+                                      shelf = {book.shelf}
+                                      image = {book.imageLinks.smallThumbnail}
+                                      authors = {book.authors}
+                                      handleListChange={this.props.handleListChange}
+                                      onDeleteBook={this.props.onDeleteBook}
+                                      />
                                   )
                               )}
-                    </div>
+                        </li>
+                        </ol>
+                      </div>
+                      </div>
+                  </div>
                 )
               }
           )
         }
+        <Link className="open-search" to="/search">Add a book</Link>
       </div>
       )
   }}

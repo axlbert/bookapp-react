@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
+import './App.css'
+
 
 /* not pursued further since that endpoint is not available on the API */
 class SearchBook extends Component {
@@ -9,10 +11,11 @@ class SearchBook extends Component {
 	render() {
 
 		return (
-			<div className="searcher">
-			Search
-      		<input className="search-box" type="text"
-      		placeholder="search for book titles"
+			<div className="search-books">
+			<div className="search-books-bar">
+			
+      		<input className="search-books-input-wrapper" type="text"
+      		placeholder="Search by title or author"
       		value={this.props.query}
       		onChange={(event) => this.props.updateQuery(event.target.value)}
 			/>
@@ -20,6 +23,7 @@ class SearchBook extends Component {
 
       	
       	<Link className="close-search" to="/">back</Link>
+      	</div>
       	</div>
 			)
 	}
