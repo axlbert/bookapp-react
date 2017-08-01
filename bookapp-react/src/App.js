@@ -108,8 +108,8 @@ class App extends Component {
       <BrowserRouter>
       <div className="App">
         <Route exact path="/search" render={() => (
-            {/*<SearchBook query={this.state.query} updateQuery={this.updateQuery}/>*/}
-            <SearchBook searchResults={this.state.searchResults} query={this.state.query} showingBooks={showingBooks} handleListChange={this.handleListChange} onDeleteBook={this.removeBook}/>
+            <SearchBook query={this.state.query} updateQuery={this.updateQuery}/>
+            
           )}
         />
         {/* Using Route allows to use the back/forth buttons in the browser. Use "exact" to only render where path*/}

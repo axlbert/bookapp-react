@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import './App.css'
-
+import ShelfList from './booklist'
 
 /* not pursued further since that endpoint is not available on the API */
 class SearchBook extends Component {
@@ -24,7 +24,7 @@ class SearchBook extends Component {
       	
       	<Link className="close-search" to="/">back</Link>
       	</div>
-      	<ShelfList books={this.props.searchResults} showingBooks={this.props.showingBooks} handleListChange={this.props.handleListChange} onDeleteBook={this.props.onDeleteBook}/>
+      {/*<ShelfList books={this.props.searchResults} showingBooks={this.props.showingBooks} handleListChange={this.props.handleListChange} onDeleteBook={this.props.onDeleteBook}/> */}
       	</div>
 			)
 	}
