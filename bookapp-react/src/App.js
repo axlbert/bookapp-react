@@ -89,13 +89,18 @@ class App extends Component {
 
   /* moving books between different shelves */
   handleListChange(entry, shelf) {
-   /* const bookIndex = this.findBookInList(entry.id);*/
+   const bookIndex = this.findBookInList(entry.id);
    /*console.log(entry)
     console.log('You just selected:' + entry.title + "to be moved to " + shelf); */
     BooksAPI.update(entry, shelf).then(() => {
 
-       this.setState((prevState) => {
-        books : prevState.books.filter((b) => b.id !== entry.id).concat([entry])
+       this.setState(state => {
+        /* this is the only method that works for updating the shelf properly and live*/
+        state.books[bookIndex].shelf = shelf
+
+
+        /*this method has been recommended by a reviewer but I cannot get this to work */
+        books : this.state.books.filter((c) => c.title !== entry.title).concat([entry])
       })
     })
 
