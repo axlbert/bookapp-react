@@ -59,11 +59,6 @@ class App extends Component {
     this.setState({ query: '' })
   }
 
-  refreshBooks = () => {
-    BooksAPI.getAll().then((books) => {
-      this.setState({books})})
-  }
-
 
   /* lifecyle event for the api request */
   componentDidMount() {
@@ -93,40 +88,20 @@ class App extends Component {
 
 
   /* moving books between different shelves */
-  /*handleListChange(entry, shelf) {
-    const bookIndex = this.findBookInList(entry.id);
-    console.log(entry)
-    console.log('You just selected:' + entry.title + "to be moved to " + shelf);
-    if (bookIndex !== -1) {
-      this.setState(state => {
-        books: books[bookIndex].shelf
-        /*state.books[bookIndex].shelf = shelf;
-  
-        return state;
+  handleListChange(entry, shelf) {
+   /* const bookIndex = this.findBookInList(entry.id);*/
+   /*console.log(entry)
+    console.log('You just selected:' + entry.title + "to be moved to " + shelf); */
+    BooksAPI.update(entry, shelf).then(() => {
+
+       this.setState((prevState) => {
+        books : prevState.books.filter((b) => b.id !== entry.id).concat([entry])
       })
-    }
-    BooksAPI.update(entry, shelf)
+    })
 
     this.resetQuery();
-    /*this function updates the global book state */
-    /*this.refreshBooks();
-  }*/
 
-  handleListChange  = (book, shelf) => {
-        BooksAPI.update(book, shelf)
-                .then(() => {
-                    book.shelf = shelf
-                    this.setState((prevState) => (
-                        {
-                            books : prevState.books.filter((b) => b.id !== book.id).concat([book])
-                        }
-                    ))
-                })
-    }
-
-    
-
-  
+  }
 
   render() {
       let showingBooks
