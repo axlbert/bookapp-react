@@ -88,28 +88,17 @@ class App extends Component {
 
 
   /* moving books between different shelves */
-  handleListChange(entry, shelf) {
-   const bookIndex = this.findBookInList(entry.id);
-   /*console.log(entry)
-    console.log('You just selected:' + entry.title + "to be moved to " + shelf); */
-    BooksAPI.update(entry, shelf).then(() => {
-      try {
-      this.state.books[bookIndex].shelf = shelf
-      this.setState(state => {
-        /* this is the only method that works for updating the shelf properly and live*/
-         
-        /*this method has been recommended by a reviewer but I cannot get this to work */
-        books : this.state.books.filter((c) => c.title !== entry.title).concat([entry])
-      })
-    }
-    catch (err) {
-       this.setState(state => {
-        /* this is the only method that works for updating the shelf properly and live*/
-         
-        /*this method has been recommended by a reviewer but I cannot get this to work */
-        books : this.state.books.filter((c) => c.title !== entry.title).concat([entry])
-      })
-     }
+  handleListChange(book, shelf) {
+   const bookIndex = this.findBookInList(book.id);
+
+   /* i feel something like this needs to be done to refresh the ui but it throws an error 
+   this.setState({ books: this.state.books[bookIndex].shelf });*/
+
+    BooksAPI.update(book, shelf).then(() => {
+      /*book.shelf = shelf*/
+      this.setState((state) => ({
+        books : state.books /*.filter((c) => c.id !== book.id).concat([book])*/ /* this part was causing errors */
+      }))  
     })
 
     this.resetQuery();
