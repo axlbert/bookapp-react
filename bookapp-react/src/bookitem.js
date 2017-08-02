@@ -16,7 +16,7 @@ function BookItem(props) {
       <img className="book-cover"  src={image}/>
       <div className="book-shelf-changer">
         <select value={shelf} onChange={e =>
-                props.handleListChange(props, e.target.value)}>
+                props.handleListChange(props.book, e.target.value)}>
           <option value="none" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>

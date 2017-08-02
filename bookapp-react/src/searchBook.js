@@ -39,7 +39,7 @@ class SearchBook extends Component {
                       	this.props.books.map((book) => (
                                      <BookItem key={book.id + book.title + book.shelf}
                                            id = {book.id}
-                                      
+                                      book={book}
                                       title = {book.title}
                                       shelf = {book.shelf}
                                       image = {book.imageLinks.smallThumbnail}

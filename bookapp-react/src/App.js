@@ -97,7 +97,7 @@ class App extends Component {
     BooksAPI.update(book, shelf).then(() => {
       /*book.shelf = shelf*/
       this.setState((state) => ({
-        books : state.books /*.filter((c) => c.id !== book.id).concat([book])*/ /* this part was causing errors */
+        books : state.books.filter((c) => c.id !== book.id).concat([book])
       }))  
     })
 
