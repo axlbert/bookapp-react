@@ -93,25 +93,40 @@ class App extends Component {
 
 
   /* moving books between different shelves */
-  handleListChange(entry, shelf) {
+  /*handleListChange(entry, shelf) {
     const bookIndex = this.findBookInList(entry.id);
     console.log(entry)
     console.log('You just selected:' + entry.title + "to be moved to " + shelf);
     if (bookIndex !== -1) {
       this.setState(state => {
-        state.books[bookIndex].shelf = shelf;
+        books: books[bookIndex].shelf
+        /*state.books[bookIndex].shelf = shelf;
   
         return state;
       })
     }
-    BooksAPI.update(entry, shelf);
+    BooksAPI.update(entry, shelf)
+
     this.resetQuery();
     /*this function updates the global book state */
-    this.refreshBooks();
+    /*this.refreshBooks();
+  }*/
+
+  handleListChange  = (book, shelf) => {
+        BooksAPI.update(book, shelf)
+                .then(() => {
+                    book.shelf = shelf
+                    this.setState((prevState) => (
+                        {
+                            books : prevState.books.filter((b) => b.id !== book.id).concat([book])
+                        }
+                    ))
+                })
+    }
 
     
 
-  }
+  
 
   render() {
       let showingBooks
