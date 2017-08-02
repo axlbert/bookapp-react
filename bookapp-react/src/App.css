@@ -8,6 +8,13 @@ body, .app {
   background: white;
 }
 
+
+
+.extraSpace {
+  height: 100px;
+
+}
+
 /* main page */
 
 .list-books-title {

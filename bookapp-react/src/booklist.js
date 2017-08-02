@@ -13,6 +13,7 @@ const shelves = ["currentlyReading","wantToRead","read"]
 
 class ShelfList extends Component {
 /* when refactoring from function to class, we need to include this. before props and add render() instead of just return */
+
     render() {
     /* further below this.props.books list has been replaced by showingBooks since this is the filtered list */
     	return (
@@ -35,7 +36,7 @@ class ShelfList extends Component {
 
                       {this.props.showingBooks.filter(el => el.shelf === element)
                         .map((book) => (
-                                     <BookItem key={book.title}
+                                     <BookItem key={book.id + book.title + book.shelf}
                                            id = {book.id}
                                       
                                       title = {book.title}

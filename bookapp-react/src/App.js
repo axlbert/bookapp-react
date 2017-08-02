@@ -106,6 +106,7 @@ class App extends Component {
     }
     BooksAPI.update(entry, shelf);
     this.resetQuery();
+    /*this function updates the global book state */
     this.refreshBooks();
 
     

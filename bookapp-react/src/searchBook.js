@@ -30,13 +30,14 @@ class SearchBook extends Component {
 
                   
                       <div className="bookshelf-books">
+                      <div className="extraSpace"></div>
                         <ol className="books-grid">
                         
 
                       {
 
                       	this.props.books.map((book) => (
-                                     <BookItem key={book.title}
+                                     <BookItem key={book.id + book.title + book.shelf}
                                            id = {book.id}
                                       
                                       title = {book.title}
@@ -54,7 +55,7 @@ class SearchBook extends Component {
                       </div>
                       </div>
                   
-                )
+                
       	
 
       	</div>
