@@ -13,7 +13,7 @@ function BookItem(props) {
     <div className="book">
     <div className="book-top">
    
-      <img className="book-cover"  src={image}/>
+      <img className="book-cover" alt="img" src={image}/>
       <div className="book-shelf-changer">
         <select value={shelf} onChange={e =>
                 props.handleListChange(props.book, e.target.value)}>
