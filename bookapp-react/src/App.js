@@ -93,15 +93,23 @@ class App extends Component {
    /*console.log(entry)
     console.log('You just selected:' + entry.title + "to be moved to " + shelf); */
     BooksAPI.update(entry, shelf).then(() => {
-
-       this.setState(state => {
+      try {
+      this.state.books[bookIndex].shelf = shelf
+      this.setState(state => {
         /* this is the only method that works for updating the shelf properly and live*/
-        state.books[bookIndex].shelf = shelf
-
-
+         
         /*this method has been recommended by a reviewer but I cannot get this to work */
         books : this.state.books.filter((c) => c.title !== entry.title).concat([entry])
       })
+    }
+    catch (err) {
+       this.setState(state => {
+        /* this is the only method that works for updating the shelf properly and live*/
+         
+        /*this method has been recommended by a reviewer but I cannot get this to work */
+        books : this.state.books.filter((c) => c.title !== entry.title).concat([entry])
+      })
+     }
     })
 
     this.resetQuery();
