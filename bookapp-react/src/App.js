@@ -60,7 +60,8 @@ class App extends Component {
   }
 
   refreshBooks = () => {
-    this.setState({ searchResults : this.state.books })
+    BooksAPI.getAll().then((books) => {
+      this.setState({books})})
   }
 
 
@@ -106,9 +107,8 @@ class App extends Component {
     BooksAPI.update(entry, shelf);
     this.resetQuery();
     this.refreshBooks();
-     BooksAPI.getAll().then((books) => {
-      this.setState({books})
-    })
+
+    
 
   }
 
