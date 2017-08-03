@@ -30,25 +30,27 @@ class App extends Component {
 
   }
 
-
-  setBookShelfs() {
-    for (var i = 0; i < this.state.books.length; i++ ) {
-      if(this.state.books.id === this.state.searchResults.id) {
-          this.state.searchResults.shelf = this.state.books.shelf
-      } else {
-          this.state.searchResults.shelf = 'None'
-        }
-      }
-  };
-
-
   /* passing in query for search */
   updateQuery = (query) => {
    /* if (query.length > 2) { */
     query = query.trim()
     BooksAPI.search(query,10).then( (results) => {
+      
+      results.map((b) => {
+        b.shelf = 'none'
+      })
+
+
+      for (const book of this.state.books) {
+        results.map((b) => {
+          if (book.id === b.id) {
+            b.shelf = book.shelf
+          }
+        })
+      }
+
       try {
-      this.setBookShelfs();
+
       this.setState({
        query: query,
        searchResults: results,
