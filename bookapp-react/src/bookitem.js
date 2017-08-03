@@ -4,10 +4,12 @@ import React from 'react';
 /* cannot use lifecycle events in functions */
 function BookItem(props) {
 
-  const title = props.book.title;
+/* simplifying some code example */
+/*  const title = props.book.title;
   const shelf = props.book.shelf;
-  const authors = props.book.authors;
+  const authors = props.book.authors;*/
   const image = props.book.imageLinks.smallThumbnail;
+  const { title, shelf, authors} = props.book;
   
   return (
     <div className="book">
@@ -30,7 +32,7 @@ function BookItem(props) {
       
     </div>
     <div className="book-title">{title}</div>
-    <div className="book-authors">{authors}</div>
+    <div className="book-authors">{authors.join()}</div>
     </div>
     )
 }

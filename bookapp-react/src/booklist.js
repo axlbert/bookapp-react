@@ -11,10 +11,8 @@ import {Link} from 'react-router-dom'
 
 const shelves = ["currentlyReading","wantToRead","read"]
 
-class ShelfList extends Component {
-/* when refactoring from function to class, we need to include this. before props and add render() instead of just return */
-
-    render() {
+/* now a stateless functional component since we manage state externally*/
+function ShelfList(props) {
     /* further below this.props.books list has been replaced by showingBooks since this is the filtered list */
     	return (
       <div className="list-books">
@@ -34,14 +32,14 @@ class ShelfList extends Component {
                         <ol  key="booklist-grid" className="books-grid">
                         
 
-                      {this.props.showingBooks.filter(el => el.shelf === element)
+                      {props.showingBooks.filter(el => el.shelf === element)
                         .map((book) => (
                                      <BookItem key={book.id + book.title}
                                       
                                       book={book}
                                       
-                                      handleListChange={this.props.handleListChange}
-                                      onDeleteBook={this.props.onDeleteBook}
+                                      handleListChange={props.handleListChange}
+                                      onDeleteBook={props.onDeleteBook}
                                       />
                                   )
                               )}
@@ -57,7 +55,7 @@ class ShelfList extends Component {
         <Link className="open-search" to="/search">Add a book</Link>
       </div>
       )
-  }}
+  }
 
 
 

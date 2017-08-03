@@ -29,14 +29,28 @@ class App extends Component {
     };
 
   }
-  
+
+
+  setBookShelfs() {
+    for (var i = 0; i < this.state.books.length; i++ ) {
+      if(this.state.books.id === this.state.searchResults.id) {
+          this.state.searchResults.shelf = this.state.books.shelf
+      } else {
+          this.state.searchResults.shelf = 'None'
+        }
+      }
+  };
+
+
   /* passing in query for search */
   updateQuery = (query) => {
    /* if (query.length > 2) { */
+    query = query.trim()
     BooksAPI.search(query,10).then( (results) => {
       try {
+      this.setBookShelfs();
       this.setState({
-       query: query.trim(),
+       query: query,
        searchResults: results,
       })
      }
@@ -49,7 +63,7 @@ class App extends Component {
 
       } 
     })
-   /* } */
+   
   }
 
 
@@ -70,7 +84,7 @@ class App extends Component {
   /* endpoint not provided by API - not implemented further */
   removeBook = (book) => {
     this.setState((state) => ({
-      books : this.state.books.filter((c) => c.title !== book.title)
+      books : this.state.books.filter((c) => c.id !== book.id)
     }))
     /* this helps to also remove book from DB*/
     BooksAPI.update(book, 'none')
