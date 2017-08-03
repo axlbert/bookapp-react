@@ -30,13 +30,13 @@ class ShelfList extends Component {
 
                   <div className="bookshelf">
                     <h2 className="bookshelf-title">{element}</h2>
-                      <div className="bookshelf-books">
-                        <ol className="books-grid">
+                      <div  key="booklist-books"  className="bookshelf-books">
+                        <ol  key="booklist-grid" className="books-grid">
                         
 
                       {this.props.showingBooks.filter(el => el.shelf === element)
                         .map((book) => (
-                                     <BookItem key={book.id + book.title + book.shelf}
+                                     <BookItem key={book.id + book.title}
                                       
                                       book={book}
                                       

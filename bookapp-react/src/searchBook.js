@@ -11,8 +11,8 @@ class SearchBook extends Component {
 	render() {
 
 		return (
-			<div className="search-books">
-			<div className="search-books-bar">
+			<div key="searchbook-search-books" className="search-books">
+			<div key="searchbook-search-books-bar"  className="search-books-bar">
 			
       		<input className="search-books-input-wrapper" type="text"
       		placeholder="Search by title or author"
@@ -25,19 +25,19 @@ class SearchBook extends Component {
       	<Link className="close-search" to="/">back</Link>
       	</div>
       {/*<ShelfList books={this.props.searchResults} showingBooks={this.props.showingBooks} handleListChange={this.props.handleListChange} onDeleteBook={this.props.onDeleteBook}/> */}
-      	<div className="search-results">
+      	<div key="searchbook-results" className="search-results">
       		
 
                   
-                      <div className="bookshelf-books">
-                      <div className="extraSpace"></div>
-                        <ol className="books-grid">
+                      <div key="searchbook-shelf" className="bookshelf-books">
+                      <div  key="searchbook-extrashelf" className="extraSpace"></div>
+                        <ol  key="searchbook-grid" className="books-grid">
                         
 
                       {
 
                       	this.props.books.map((book) => (
-                                     <BookItem key={book.id + book.title + book.shelf}
+                                     <BookItem key={book.id  + book.title}
                                            
                                       book={book}
                                       

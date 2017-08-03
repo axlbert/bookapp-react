@@ -31,10 +31,8 @@ class App extends Component {
   }
   
   /* passing in query for search */
-  /*updateQuery = (query) => {
-    this.setState({ query: query.trim() })
-  }*/
   updateQuery = (query) => {
+   /* if (query.length > 2) { */
     BooksAPI.search(query,10).then( (results) => {
       try {
       this.setState({
@@ -51,6 +49,7 @@ class App extends Component {
 
       } 
     })
+   /* } */
   }
 
 
@@ -92,7 +91,8 @@ class App extends Component {
     BooksAPI.update(book, shelf).then(() => {
       book.shelf = shelf;
       this.setState((state) => ({
-        books : state.books.filter((c) => c.id !== book.id).concat([book])
+        books : state.books.filter((c) => c.id !== book.id).concat([book]),
+        searchResults: state.searchResults.filter((c) => c.id !== book.id)
       }))  
     })
 
