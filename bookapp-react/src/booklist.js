@@ -37,12 +37,9 @@ class ShelfList extends Component {
                       {this.props.showingBooks.filter(el => el.shelf === element)
                         .map((book) => (
                                      <BookItem key={book.id + book.title + book.shelf}
-                                           id = {book.id}
+                                      
                                       book={book}
-                                      title = {book.title}
-                                      shelf = {book.shelf}
-                                      image = {book.imageLinks.smallThumbnail}
-                                      authors = {book.authors}
+                                      
                                       handleListChange={this.props.handleListChange}
                                       onDeleteBook={this.props.onDeleteBook}
                                       />

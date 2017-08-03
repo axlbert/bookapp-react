@@ -4,10 +4,10 @@ import React from 'react';
 /* cannot use lifecycle events in functions */
 function BookItem(props) {
 
-  const title = props.title;
-  const shelf = props.shelf;
-  const authors = props.authors;
-  const image = props.image;
+  const title = props.book.title;
+  const shelf = props.book.shelf;
+  const authors = props.book.authors;
+  const image = props.book.imageLinks.smallThumbnail;
   
   return (
     <div className="book">

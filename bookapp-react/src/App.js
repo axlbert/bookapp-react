@@ -89,13 +89,8 @@ class App extends Component {
 
   /* moving books between different shelves */
   handleListChange(book, shelf) {
-   
-
-   /* i feel something like this needs to be done to refresh the ui but it throws an error 
-   this.setState({ books: this.state.books[bookIndex].shelf });*/
-
     BooksAPI.update(book, shelf).then(() => {
-      book.shelf = ShelfList
+      book.shelf = shelf;
       this.setState((state) => ({
         books : state.books.filter((c) => c.id !== book.id).concat([book])
       }))  
