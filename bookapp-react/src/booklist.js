@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import BookItem from './bookitem'
 import {Link} from 'react-router-dom'
 

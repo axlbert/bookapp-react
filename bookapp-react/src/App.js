@@ -35,7 +35,7 @@ class App extends Component {
    /* if (query.length > 2) { */
     query = query.trim()
     BooksAPI.search(query,10).then( (results) => {
-      
+      try {
       results.map((b) => {
         b.shelf = 'none'
       })
@@ -49,7 +49,7 @@ class App extends Component {
         })
       }
 
-      try {
+      
 
       this.setState({
        query: query,
