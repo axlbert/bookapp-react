@@ -145,7 +145,7 @@ class App extends Component {
       <div className="App">
         <Route exact path="/search" render={() => (
             
-            <SearchBook getBooks={this.getBooks} query={this.state.query} updateQuery={this.updateQuery} books={this.state.searchResults} handleListChange={this.handleListChange}  clearQuery={this.resetQuery}/>
+            <SearchBook getBooks={this.getBooks} query={this.state.query} updateQuery={this.updateQuery} books={this.state.searchResults} handleListChange={this.handleListChange}  clearQuery={this.resetSearch}/>
             
           )}
         />
