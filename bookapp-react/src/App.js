@@ -29,17 +29,21 @@ class App extends Component {
     };
 
   }
+  getBooks = () => {
+    BooksAPI.getAll().then(books => this.setState({books}))
+  }
+
 
   /* passing in query for search */
   updateQuery = (query) => {
    /* if (query.length > 2) { */
     query = query.trim()
     BooksAPI.search(query,10).then( (results) => {
+
       try {
       results.map((b) => {
         b.shelf = 'none'
       })
-
 
       for (const book of this.state.books) {
         results.map((b) => {
@@ -48,8 +52,6 @@ class App extends Component {
           }
         })
       }
-
-      
 
       this.setState({
        query: query,
@@ -74,6 +76,11 @@ class App extends Component {
     this.setState({ query: '' })
   }
 
+  resetSearch = () => {
+    this.setState({ searchResults: [],
+                    query: '' 
+       })
+  }
 
   /* lifecyle event for the api request */
   componentDidMount() {
@@ -104,11 +111,14 @@ class App extends Component {
 
   /* moving books between different shelves */
   handleListChange(book, shelf) {
+
     BooksAPI.update(book, shelf).then(() => {
       book.shelf = shelf;
       this.setState((state) => ({
         books : state.books.filter((c) => c.id !== book.id).concat([book]),
-        searchResults: state.searchResults.filter((c) => c.id !== book.id)
+        /* I prefer to have the move disappear from the search page once they are selected for reading, but some reviewers 
+        flagged this as a bug !?  There I will uncomment this part for now */
+      /*  searchResults: state.searchResults.filter((c) => c.id !== book.id). */
       }))  
     })
 
@@ -135,13 +145,13 @@ class App extends Component {
       <div className="App">
         <Route exact path="/search" render={() => (
             
-            <SearchBook query={this.state.query} updateQuery={this.updateQuery} books={this.state.searchResults} handleListChange={this.handleListChange}/>
+            <SearchBook getBooks={this.getBooks} query={this.state.query} updateQuery={this.updateQuery} books={this.state.searchResults} handleListChange={this.handleListChange}  clearQuery={this.resetQuery}/>
             
           )}
         />
         {/* Using Route allows to use the back/forth buttons in the browser. Use "exact" to only render where path*/}
         <Route exact path="/" render={() => (
-            <ShelfList books={this.state.books} showingBooks={showingBooks} handleListChange={this.handleListChange} onDeleteBook={this.removeBook}/>
+            <ShelfList books={this.state.books} showingBooks={showingBooks} handleListChange={this.handleListChange} onDeleteBook={this.removeBook} clearQuery={this.resetSearch}/>
           )}
         />
       </div>

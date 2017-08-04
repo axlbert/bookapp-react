@@ -14,6 +14,7 @@ const shelves = ["currentlyReading","wantToRead","read"]
 /* now a stateless functional component since we manage state externally*/
 function ShelfList(props) {
     /* further below this.props.books list has been replaced by showingBooks since this is the filtered list */
+
     	return (
       <div className="list-books">
         <div className="list-books-title">
@@ -33,8 +34,8 @@ function ShelfList(props) {
                         
 
                       {props.showingBooks.filter(el => el.shelf === element)
-                        .map((book) => (
-                                     <BookItem key={book.id + book.title}
+                        .map((book, index) => (
+                                     <BookItem key={book.id + index}
                                       
                                       book={book}
                                       
@@ -52,7 +53,7 @@ function ShelfList(props) {
               }
           )
         }
-        <Link className="open-search" to="/search">Add a book</Link>
+        <Link  onClick={props.clearQuery} className="open-search" to="/search">Add a book</Link>
       </div>
       )
   }

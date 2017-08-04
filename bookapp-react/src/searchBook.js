@@ -5,6 +5,9 @@ import BookItem from './bookitem'
 
 /* not pursued further since that endpoint is not available on the API */
 class SearchBook extends Component {
+  produceRandomSeeded(){
+    return '0.'+Math.random();
+  }
 
 	
  	/* use inside html/jsx section to display query :  {JSON.stringify(this.state)} */
@@ -36,8 +39,8 @@ class SearchBook extends Component {
 
                       {
 
-                      	this.props.books.map((book) => (
-                                     <BookItem key={book.id  + book.title}
+                      	this.props.books.map((book, index) => (
+                                     <BookItem key={book.id + index}
                                            
                                       book={book}
                                       
