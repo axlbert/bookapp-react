@@ -2,13 +2,10 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import './App.css'
 import BookItem from './bookitem'
+//import { Debounce } from 'react-throttle';
 
 /* not pursued further since that endpoint is not available on the API */
 class SearchBook extends Component {
-  produceRandomSeeded(){
-    return '0.'+Math.random();
-  }
-
 	
  	/* use inside html/jsx section to display query :  {JSON.stringify(this.state)} */
 	render() {
@@ -16,13 +13,14 @@ class SearchBook extends Component {
 		return (
 			<div key="searchbook-search-books" className="search-books">
 			<div key="searchbook-search-books-bar"  className="search-books-bar">
-			
+
+		
       		<input className="search-books-input-wrapper" type="text"
       		placeholder="Search by title or author"
       		value={this.props.query}
-      		onChange={(event) => this.props.updateQuery(event.target.value)}
+      		onChange={event => this.props.updateQuery(event.target.value)}
 			/>
-
+    
 
       	
       	<Link onClick={this.props.clearQuery} className="close-search" to="/">back</Link>

@@ -36,14 +36,19 @@ class App extends Component {
 
   /* passing in query for search */
   updateQuery = (query) => {
-   /* if (query.length > 2) { */
-    query = query.trim()
-    BooksAPI.search(query,10).then( (results) => {
 
+    this.setState({query: query.trim()});
+   /* if (query.length > 2) { */
+    
+    BooksAPI.search(query).then( (results) => {
+      
       try {
+
       results.map((b) => {
         b.shelf = 'none'
       })
+      
+
 
       for (const book of this.state.books) {
         results.map((b) => {
@@ -52,15 +57,16 @@ class App extends Component {
           }
         })
       }
+      
 
       this.setState({
-       query: query,
+      
        searchResults: results,
       })
      }
      catch(err) {
       this.setState({
-       query: query.trim(),
+      
        searchResults: [],
       })
 
@@ -113,6 +119,7 @@ class App extends Component {
   handleListChange(book, shelf) {
 
     BooksAPI.update(book, shelf).then(() => {
+
       book.shelf = shelf;
       this.setState((state) => ({
         books : state.books.filter((c) => c.id !== book.id).concat([book]),
@@ -130,8 +137,14 @@ class App extends Component {
       let showingBooks
       /* matching of book query*/
       if (this.state.query) {
+
+        /* udacity recommends this procedure:  https://www.youtube.com/watch?v=xIlkBGmRq0g */
+        /* checking with two mentors - this does not mutate state directly */
           /* escape special characters and use them as string literal regardless of case */
         const match = new RegExp(escapeRegExp(this.state.query), 'i')
+
+        /* udacity recommends this procedure:  https://www.youtube.com/watch?v=xIlkBGmRq0g */
+        /* checking with two mentors - this does not mutate state directly */
         showingBooks = this.state.books.filter((book) => match.test(book.title))
         } else {
           showingBooks = this.state.books
